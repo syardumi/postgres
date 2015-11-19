@@ -45,7 +45,7 @@ RUN sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/s
 RUN mkdir -p /root/.ssh
 RUN chmod 700 /root/.ssh
 RUN chown root:root /root/.ssh
-#cp /provision/keys/insecure_key.pub /root/.ssh/authorized_keys
+RUN wget -O /root/.ssh/authorized_keys "https://github.com/syardumi/postgres/blob/master/insecure_key.pub"
 RUN chmod 600 /root/.ssh/authorized_keys
 
 RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
