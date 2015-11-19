@@ -36,6 +36,18 @@ RUN apt-get update \
 		postgresql-contrib-$PG_MAJOR=$PG_VERSION \
 	&& rm -rf /var/lib/apt/lists/*
 
+#SSH
+RUN apt-get -y install openssh-server
+RUN mkdir /var/run/sshd
+RUN sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config
+
+#keys
+RUN mkdir -p /root/.ssh
+RUN chmod 700 /root/.ssh
+RUN chown root:root /root/.ssh
+#cp /provision/keys/insecure_key.pub /root/.ssh/authorized_keys
+RUN chmod 600 /root/.ssh/authorized_keys
+
 RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
 
 ENV PATH /usr/lib/postgresql/$PG_MAJOR/bin:$PATH
