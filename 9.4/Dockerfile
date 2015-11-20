@@ -40,7 +40,7 @@ RUN apt-get update \
 RUN echo "deb http://ftp.us.debian.org/debian jessie main" | tee -a /etc/apt/sources.list
 RUN echo "deb-src http://ftp.us.debian.org/debian jessie main" | tee -a /etc/apt/sources.list
 RUN apt-get update
-RUN apt-get -y install openssh-server
+RUN apt-get -y install openssh-server wget
 RUN mkdir /var/run/sshd
 RUN sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config
 
